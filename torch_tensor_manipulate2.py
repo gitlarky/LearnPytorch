@@ -1,0 +1,85 @@
+import torch
+
+# Broadcasting
+a=torch.ones(2,3,4,5)
+b=torch.tensor(7)
+print('a= \n', a, '\n b= \n', b, '\n a+b= \n', a+b, '\n a*b= \n', a*b)
+c=torch.arange(1, 6)
+print('a= \n', a, '\n c= \n', c, '\n a-c= \n', a-c, '\n a/c= \n', a/c)
+d=c.expand(4, 5)
+print('a= \n', a, '\n d= \n', d, '\n torch.add(a, d)= \n', torch.add(a, d), '\n torch.mul(a, d)= \n', torch.mul(a, d))
+e=torch.full([4, 1], 7)
+print('a= \n', a, '\n e= \n', e, '\n torch.sub(a, d)= \n', torch.sub(a, e), '\n torch.div(a, d)= \n', torch.div(a, e))
+
+f=torch.randn(2, 2, 4, 5)
+print('torch.cat([a, f], dim=1): ', torch.cat([a, f], dim=1).size(), '\n', torch.cat([a, f], dim=1))
+print('torch.cat([f, a], dim=1): ', torch.cat([f, a], dim=1).size(), '\n', torch.cat([f, a], dim=1))
+
+
+g=torch.randn(1, 3, 4, 5)
+h=torch.randn(1, 3, 4, 5)
+
+print('torch.stack([g, h], dim=0): ', torch.stack([g, h], dim=0).size(), '\n', torch.stack([g, h], dim=0))
+print('torch.stack([g, h], dim=1): ', torch.stack([g, h], dim=1).size(), '\n', torch.stack([g, h], dim=1))
+print('torch.stack([g, h], dim=2): ', torch.stack([g, h], dim=2).size(), '\n', torch.stack([g, h], dim=2))
+print('torch.stack([g, h], dim=3): ', torch.stack([g, h], dim=3).size(), '\n', torch.stack([g, h], dim=3))
+
+print('torch.stack([g, h], dim=-5): ', torch.stack([g, h], dim=-5).size(), '\n', torch.stack([g, h], dim=-5))
+print('torch.stack([g, h], dim=-4): ', torch.stack([g, h], dim=-4).size(), '\n', torch.stack([g, h], dim=-4))
+print('torch.stack([g, h], dim=-3): ', torch.stack([g, h], dim=-3).size(), '\n', torch.stack([g, h], dim=-3))
+print('torch.stack([g, h], dim=-2): ', torch.stack([g, h], dim=-2).size(), '\n', torch.stack([g, h], dim=-2))
+
+print('a.unsqueeze(0): ', a.unsqueeze(0).size())
+print('a.unsqueeze(1): ', a.unsqueeze(1).size())
+print('a.unsqueeze(2): ', a.unsqueeze(2).size())
+print('a.unsqueeze(3): ', a.unsqueeze(3).size())
+print('a.unsqueeze(4): ', a.unsqueeze(4).size())
+
+print('a.unsqueeze(-1): ', a.unsqueeze(-1).size())
+print('a.unsqueeze(-2): ', a.unsqueeze(-2).size())
+print('a.unsqueeze(-3): ', a.unsqueeze(-3).size())
+print('a.unsqueeze(-4): ', a.unsqueeze(-4).size())
+print('a.unsqueeze(-5): ', a.unsqueeze(-5).size())
+
+a1, a2=a.split(1, dim=0)
+print('a1, a2=a.split(1, dim=0): a1.size()=', a1.size(), 'a2.size()=', a2.size())
+a3, a4=a.split([2,1], dim=1)
+print('a3, a4=a.split([2,1], dim=1): a3.size()=', a3.size(), 'a4.size()=', a4.size())
+a5, a6=a.chunk(2, dim=2)
+print('a5, a6=a.chunk(2, dim=2): a5.size()=', a5.size(), 'a6.size()=', a6.size())
+
+i=torch.randn(2,3)
+j=torch.randn(3,4)
+k=torch.randn(2, 2, 3)
+l=torch.randn(2, 1, 2, 3)
+m=torch.randn(2, 2, 3, 4)
+n=torch.randn(1, 2, 2, 3)
+print('torch.mm(i, j).size():', torch.mm(i, j).size())
+print('torch.matmul(i, j).size():', torch.matmul(i, j).size())
+print('torch.matmul(k, j).size():', torch.matmul(k, j).size())
+print('torch.matmul(l, j).size():', torch.matmul(l, j).size())
+print('(l@j).size():', (l@j).size())
+print('torch.matmul(l, m).size():', torch.matmul(l, m).size())
+print('torch.matmul(n, m).size():', torch.matmul(n, m).size())
+
+o=torch.full([2, 3], 3.14)
+print('0=torch.full([2, 3], 3.14): \n', o)
+print('o.pow(3): \n', o.pow(3), '\n o**3: \n', o**3)
+print('o.sqrt(): \n', o.sqrt())
+print('o.rsqrt(): \n', o.rsqrt())
+print('o.floor(): \n', o.floor())
+print('o.ceil(): \n', o.ceil())
+print('o.round(): \n', o.round())
+print('o.trunc(): \n', o.trunc())
+print('o.frac(): \n', o.frac())
+
+p=torch.exp(torch.ones(2, 3))
+print('p=torch.exp(torch.ones(2, 3)): \n', p)
+print('p.log(): \n', p.log())
+print('p.log10(): \n', p.log10())
+
+q=torch.rand(2, 5)*15
+print('q=torch.rand(2, 5)*15: \n', q)
+print('q.median(): \n', q.median())
+print('q.clamp(q.median()): \n', q.clamp(q.median()))
+print('q.clamp(0, q.median()): \n', q.clamp(0, q.median()))
